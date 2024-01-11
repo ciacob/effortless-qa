@@ -1,0 +1,31 @@
+{
+  "name": "effortless-qa",
+  "version": "1.0.0",
+  "description": "EffortlessQA: Streamlining Your Testing Process with Simplicity",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciacob/effortless-qa.git"
+  },
+  "keywords": [
+  	"UAT",
+  	"QA",
+  	"TM",
+  	"User Acceptance Testing",
+    "Quality Assurance",
+    "Test Management",
+    "Simplicity",
+    "Efficiency",
+    "Streamlined",
+    "User-friendly"
+  ],
+  "author": "Claudius Iacob <claudius.iacob@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ciacob/effortless-qa/issues"
+  },
+  "homepage": "https://github.com/ciacob/effortless-qa#readme"
+}
