@@ -1,0 +1,299 @@
+{
+  "Project": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "name": { "type": "STRING" },
+    "version": { "type": "STRING" },
+    "tagline": { "type": "STRING" },
+    "description": { "type": "STRING" },
+    "icon": {
+      "type": "UUID",
+      "references": {
+        "model": "Attachment",
+        "key": "uid"
+      },
+      "onDelete": "CASCADE"
+    },
+    "status": {
+      "type": "ENUM",
+      "values": ["active", "archived"]
+    },
+    "owner_name": { "type": "STRING" },
+    "owner_email": { "type": "STRING" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "TestSuite": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "name": { "type": "STRING" },
+    "description": { "type": "STRING" },
+    "related_project": {
+      "type": "UUID",
+      "references": {
+        "model": "Project",
+        "key": "uid"
+      }
+    },
+    "common_preparation": { "type": "STRING" },
+    "common_cleanup": { "type": "STRING" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "Test": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "name": { "type": "STRING" },
+    "description": { "type": "STRING" },
+    "related_test_suite": {
+      "type": "UUID",
+      "references": {
+        "model": "TestSuite",
+        "key": "uid"
+      }
+    },
+    "related_project": {
+      "type": "UUID",
+      "references": {
+        "model": "Project",
+        "key": "uid"
+      }
+    },
+    "common_preparation": { "type": "STRING" },
+    "common_cleanup": { "type": "STRING" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "TestCase": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "name": { "type": "STRING" },
+    "description": { "type": "STRING" },
+    "related_test": {
+      "type": "UUID",
+      "references": {
+        "model": "Test",
+        "key": "uid"
+      }
+    },
+    "related_test_suite": {
+      "type": "UUID",
+      "references": {
+        "model": "TestSuite",
+        "key": "uid"
+      }
+    },
+    "related_project": {
+      "type": "UUID",
+      "references": {
+        "model": "Project",
+        "key": "uid"
+      }
+    },
+    "preparation": { "type": "STRING" },
+    "action": { "type": "STRING" },
+    "expected_result": { "type": "STRING" },
+    "cleanup": { "type": "STRING" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "TestingSession": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "name": { "type": "STRING" },
+    "description": { "type": "STRING" },
+    "tester_name": { "type": "STRING" },
+    "tester_email": { "type": "STRING" },
+    "percent_of_completion": { "type": "NUMBER" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "TestQueue": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "related_testing_session": {
+      "type": "UUID",
+      "references": {
+        "model": "TestingSession",
+        "key": "uid"
+      }
+    },
+    "number_of_test_cases": { "type": "NUMBER" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "TestQueueItem": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "related_test_queue": {
+      "type": "UUID",
+      "references": {
+        "model": "TestQueue",
+        "key": "uid"
+      }
+    },
+    "related_test_case": {
+      "type": "UUID",
+      "references": {
+        "model": "TestCase",
+        "key": "uid"
+      }
+    },
+    "related_test": {
+      "type": "UUID",
+      "references": {
+        "model": "Test",
+        "key": "uid"
+      }
+    },
+    "related_test_suite": {
+      "type": "UUID",
+      "references": {
+        "model": "TestSuite",
+        "key": "uid"
+      }
+    },
+    "related_project": {
+      "type": "UUID",
+      "references": {
+        "model": "Project",
+        "key": "uid"
+      }
+    },
+    "is_enabled": { "type": "BOOLEAN" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "TestResult": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "related_testing_session": {
+      "type": "UUID",
+      "references": {
+        "model": "TestingSession",
+        "key": "uid"
+      }
+    },
+    "related_test_queue": {
+      "type": "UUID",
+      "references": {
+        "model": "TestQueue",
+        "key": "uid"
+      }
+    },
+    "related_test_case": {
+      "type": "UUID",
+      "references": {
+        "model": "TestCase",
+        "key": "uid"
+      }
+    },
+    "related_test": {
+      "type": "UUID",
+      "references": {
+        "model": "Test",
+        "key": "uid"
+      }
+    },
+    "related_test_suite": {
+      "type": "UUID",
+      "references": {
+        "model": "TestSuite",
+        "key": "uid"
+      }
+    },
+    "related_project": {
+      "type": "UUID",
+      "references": {
+        "model": "Project",
+        "key": "uid"
+      }
+    },
+
+    "status": {
+      "type": "ENUM",
+      "values": ["pass", "fail"]
+    },
+    "started_at": { "type": "DATE" },
+    "completed_at": { "type": "DATE" },
+    "number_of_seconds_spent": { "type": "NUMBER" },
+    "observations": { "type": "STRING" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "Statistic": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "related_testing_session": {
+      "type": "UUID",
+      "references": {
+        "model": "TestingSession",
+        "key": "uid"
+      }
+    },
+    "started_at": { "type": "DATE" },
+    "completed_at": { "type": "DATE" },
+    "number_of_seconds_spent": { "type": "NUMBER" },
+
+    "top_three_slowest_test_cases": {
+      "type": "UUID",
+      "references": {
+        "model": "List",
+        "key": "uid"
+      }
+    },
+    "top_three_quickest_test_cases": {
+      "type": "UUID",
+      "references": {
+        "model": "List",
+        "key": "uid"
+      }
+    },
+    "overall_status": { "type": "STRING" },
+    "number_of_test_cases_passed": { "type": "NUMBER" },
+    "number_of_test_cases_failed": { "type": "NUMBER" },
+    "number_of_tests_passed": { "type": "NUMBER" },
+    "number_of_tests_failed": { "type": "NUMBER" },
+    "number_of_test_suites_passed": { "type": "NUMBER" },
+    "number_of_test_suites_failed": { "type": "NUMBER" },
+    "number_of_projects_passed": { "type": "NUMBER" },
+    "number_of_projects_failed": { "type": "NUMBER" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "Attachment": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "file_name": { "type": "STRING" },
+    "mime_type": { "type": "STRING" },
+    "file_size": { "type": "NUMBER" },
+    "related_record_uid": { "type": "UUID" },
+    "related_record_table": { "type": "STRING" },
+    "bytes": { "type": "BLOB" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "List": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "name": { "type": "STRING" },
+    "description": { "type": "STRING" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  },
+
+  "ListItem": {
+    "uid": { "type": "UUID", "primaryKey": true, "defaultValue": "UUIDV4" },
+    "order": { "type": "NUMBER" },
+    "related_list": {
+      "type": "UUID",
+      "references": {
+        "model": "List",
+        "key": "uid"
+      }
+    },
+    "related_record_uid": { "type": "UUID" },
+    "related_record_table": { "type": "STRING" },
+    "created_at": { "type": "DATE" },
+    "updated_at": { "type": "DATE" }
+  }
+}

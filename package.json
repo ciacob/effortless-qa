@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "EffortlessQA: Streamlining Your Testing Process with Simplicity",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,10 +12,10 @@
     "url": "git+https://github.com/ciacob/effortless-qa.git"
   },
   "keywords": [
-  	"UAT",
-  	"QA",
-  	"TM",
-  	"User Acceptance Testing",
+    "UAT",
+    "QA",
+    "TM",
+    "User Acceptance Testing",
     "Quality Assurance",
     "Test Management",
     "Simplicity",
@@ -27,5 +28,9 @@
   "bugs": {
     "url": "https://github.com/ciacob/effortless-qa/issues"
   },
-  "homepage": "https://github.com/ciacob/effortless-qa#readme"
+  "homepage": "https://github.com/ciacob/effortless-qa#readme",
+  "dependencies": {
+    "sequelize": "^6.35.2",
+    "sqlite3": "^5.1.7"
+  }
 }

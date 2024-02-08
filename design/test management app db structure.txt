@@ -1,0 +1,27 @@
+v.2
+---
+
+projects (*uid, name, version, tagline, description, icon{^attachments}, status["active","archived"], owner_name, owner_email, created_at, updated_at) 
+
+test_suites (*uid, name, description, related_project{^projects}, common_preparation, common_cleanup, created_at, updated_at) 
+  
+tests (*uid, name, description, related_test_suite{^test_suites}, related_project{^projects}, common_preparation, common_cleanup, created_at, updated_at) 
+    
+test_cases (*uid, name, description, related_test{^tests}, related_test_suite{^test_suites}, related_project{^projects}, preparation, action, expected_result, cleanup, created_at, updated_at) 
+      
+
+testing_sessions (*uid, name, description, tester_name, tester_email, percent_of_completion, created_at, updated_at) 
+
+test_queues (*uid, related_testing_session{^testing_sessions}, number_of_test_cases, created_at, updated_at)
+
+test_queue_items (*uid, related_test_queue{^test_queues}, related_test_case{^test_cases}, related_test_suite{^test_suites}, related_test{^tests}, related_project{^projects}, is_enabled, created_at, updated_at) 
+    
+test_results (*uid, related_testing_session{^testing_sessions}, related_test_queue{^test_queues},  related_test_case{^test_cases}, related_test_suite{^test_suites}, related_test{^tests}, related_project{^projects}, status["pass", "fail"], started_at, completed_at, number_of_seconds_spent, observations, created_at, updated_at) 
+
+statistics (*uid, related_testing_session{^testing_sessions}, started_at, completed_at, number_of_seconds_spent, top_three_slowest_test_cases{^lists}, top_three_quickest_test_cases{^lists}, overall_status, number_of_test_cases_passed, number_of_test_cases_failed, number_of_tests_passed, number_of_tests_failed, number_of_test_suites_passed, number_of_test_suites_failed, number_of_projects_passed, number_of_projects_failed, created_at, updated_at) 
+    
+attachments (*uid, file_name, mime_type, file_size, related_record_uid, related_record_table, bytes, created_at, updated_at) 
+
+lists (*uid, name, description, created_at, updated_at)
+
+list_items (*uid, order, related_list{^lists}, related_record_uid, related_record_table, created_at, updated_at)
